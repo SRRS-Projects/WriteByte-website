@@ -22,15 +22,27 @@ from apps.noteapp.models import Note
 api = NinjaAPI()
 
 
-# @api.get("/getnote")
-# def getnote(request, id: int):
-#     note = Note.objects.get(id=id)
-#     return {"note":
-#             }
+@api.get("/note/{id}")
+def getnote(request, id: int):
+    data = Note.objects.filter(id=id) if id else Note.objects.filter()
+    return {"notes": [
+        {
+            "id": note.id,
+            "title": note.title,
+            "content": note.content,
+            "created_at": note.created_at,
+        }
+        for note in data]}
+
+
+@api.delete("/note/{id}")
+def delnote(request, id: int):
+    note = Note.objects.get(id=id)
+    note.delete()
 
 
 urlpatterns = [
-    path("noteapp/", include("apps.noteapp.urls")),
+    path('', include("apps.noteapp.urls")),
     path('admin/', admin.site.urls),
-    path("api/", api.urls),
+    path('api/', api.urls),
 ]

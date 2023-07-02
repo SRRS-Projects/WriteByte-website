@@ -10,26 +10,21 @@
 </head>
 
 <body>
-<div class="input">
-    <form method="POST">
-        {% csrf_token %}
-        <input name="title" type="text" placeholder="Title">
-        <br>
-        <textarea name="content" placeholder="Write a note: "></textarea>
-        <br>
-        <button type="submit">Save</button>
-    </form>
-</div>
-
 <div class="output">
     {% for item in note_data %}
     <div class="notecard">
         <h3>{{ item.title }}</h3>
         <p>{{ item.content }}</p>
         <p>{{ item.created_at }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="delete">Delete</button>
+        </form>
     </div>
     {% endfor %}
 </div>
+
+
 
 </body>
 
