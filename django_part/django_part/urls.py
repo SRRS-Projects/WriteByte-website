@@ -16,10 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ninja import NinjaAPI
+from ninja import NinjaAPI, Schema
 from apps.noteapp.models import Note
+import datetime
 
 api = NinjaAPI()
+
+
+class NoteSchema(Schema):
+    title: str
+    content: str
+
+
+@api.post("/note/new")
+def createnote(request, data: NoteSchema):
+    note = Note(title=data.title, content=data.content, created_at=datetime.datetime.now())
+    note.save()
+    return {"create_success": "true"}
 
 
 @api.get("/note/{id}")
@@ -35,10 +48,21 @@ def getnote(request, id: int):
         for note in data]}
 
 
+@api.put("/note/{id}")
+def editnote(request, id: int, data: NoteSchema):
+    note = Note.objects.get(id=id)
+    note.title = data.title
+    note.content = data.content
+    note.created_at = datetime.datetime.now()
+    note.save()
+    return {"edit_success": "true"}
+
+
 @api.delete("/note/{id}")
 def delnote(request, id: int):
     note = Note.objects.get(id=id)
     note.delete()
+    return {"delete_success": "true"}
 
 
 urlpatterns = [
