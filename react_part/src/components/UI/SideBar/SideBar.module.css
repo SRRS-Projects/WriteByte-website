@@ -1,0 +1,19 @@
+.SideBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: bisque;
+}
+
+.SideBar div {
+  display: flex;
+  flex-direction: column;
+}
+
+.SideBar button {
+  width: auto;
+  height: 50px;
+}

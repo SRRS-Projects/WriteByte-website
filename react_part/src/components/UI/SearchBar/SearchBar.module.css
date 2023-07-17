@@ -1,0 +1,25 @@
+.SearchBar {
+    margin: 10px;
+    /* width: 100%; */
+    /* max-width: 220px; */
+    height: 45px;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1.5px solid #00E0FF;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: 0px 0px 20px -18px;
+  }
+  
+  .SearchBar:hover {
+    border: 2px solid #00E0FF;
+    box-shadow: 0px 0px 20px -17px;
+  }
+  
+  .SearchBar:active {
+    transform: scale(0.98);
+  }
+  
+  .SearchBar:focus {
+    border: 2px solid #0B74BF;
+  }
