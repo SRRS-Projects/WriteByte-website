@@ -26,3 +26,25 @@ html, body, #root, .App {
 	flex-wrap: wrap;
 	flex-direction: row;
 }
+
+.NotePage {
+	display: flex;
+	flex-direction: column;
+	padding: 50px 200px;
+}
+
+.LoginPage {
+	height: 100%;
+	padding: 200px 300px;
+}
+
+.LoginForm {
+	height: 100%;
+	border-radius: 12px;
+    border: 1px solid #00E0FF;
+}
+
+.LoginForm form {
+	display: flex;
+	flex-direction: column;
+}

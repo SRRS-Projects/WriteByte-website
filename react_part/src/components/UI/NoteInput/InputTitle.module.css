@@ -1,0 +1,14 @@
+.InputTitle {
+    font-size: 48px;
+    font-weight: bold;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.InputTitle:focus {
+    outline: none;
+}
+
+.InputTitle::placeholder {
+    color:darkgray;
+}

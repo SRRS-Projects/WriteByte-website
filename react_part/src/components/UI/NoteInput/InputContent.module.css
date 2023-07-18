@@ -1,0 +1,14 @@
+.InputContent {
+    resize: none;
+    font-size: 20px;
+    overflow: hidden;
+    border: none;
+}
+
+.InputContent:focus {
+    outline: none;
+}
+
+.InputContent::placeholder {
+    color:darkgray;
+}

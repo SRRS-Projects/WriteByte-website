@@ -1,33 +1,19 @@
 import React from "react";
-import NoteCard from "./components/UI/NoteCard/NoteCard";
-import SideBar from "./components/UI/SideBar/SideBar";
-import './styles/App.css'
-import SearchBar from "./components/UI/SearchBar/SearchBar";
-
-import MySideBar from "./components/UI/SideBar/SideBar";
+import NoteList from "./pages/NoteList";
+import NotePage from "./pages/NotePage";
+import LoginPage from "./pages/LoginPage";
+import "./styles/App.css";
+import { BrowserRouter, Link, Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
-
-  
-
   return (
-    <div className="App">
-        <MySideBar/>
-      
-      <div className="main">
-        <SearchBar placeholder="Search..."/>
-        <div className="note_container">
-        <NoteCard>First Note</NoteCard>
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        <NoteCard />
-        </div>
-        
-      
-    </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+          <Route path="/notelist" element={<NoteList />} />
+          <Route path="/new" element={<NotePage />} />
+          <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
