@@ -1,11 +1,8 @@
 import classes from './MyButton.module.css'
 
-function MyButton({children}, ...props) {
+function MyButton(props) {
   return (
-    <button className={classes.MyButton}>
-      <span>{children}</span>
-      <div className="border full-rounded"></div>
-    </button>
+    <button {...props} className={classes.MyButton}>{props.children}</button>
   );
 }
 

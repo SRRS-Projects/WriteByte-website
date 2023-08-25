@@ -3,18 +3,21 @@
     position: relative;
     margin: auto;
     padding: 1em 2.5em 1em 2.5em;
-    border: none;
+    border: 1px solid cyan;
+    border-radius: 15px;
     background: #fff;
-    transition: all 0.1s linear;
+    transition: all 0.2s linear;
     box-shadow: 0 0.4em 1em rgba(0, 0, 0, 0.1);
+   }
+
+   .MyButton:hover {
+    background: #00E0FF;
+    color: white;
+    border-color: #0B74BF;
    }
    
    .MyButton:active {
     transform: scale(0.95);
-   }
-   
-   .MyButton span {
-    color: #464646;
    }
    
    .MyButton .border {
@@ -26,14 +29,4 @@
     width: 9em;
     height: 3em;
     transform: translate(-50%, -50%);
-   }
-   
-   .MyButton:hover .border {
-    display: block;
-    width: 9.9em;
-    height: 3.7em;
-   }
-   
-   .full-rounded {
-    border-radius: 2em;
    }

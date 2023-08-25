@@ -3,6 +3,7 @@
     font-weight: bold;
     border: none;
     margin-bottom: 10px;
+    width: 60%;
 }
 
 .InputTitle:focus {
