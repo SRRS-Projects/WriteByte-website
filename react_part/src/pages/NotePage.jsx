@@ -11,34 +11,49 @@ function NotePage() {
   const params = useParams();
 
   useEffect(() => {
-    async function fetchData() {
-      return await NoteService.getNotes(params.id);
+    if (params.id !== "new") {
+      async function fetchData() {
+        return await NoteService.getNotes(params.id);
+      }
+      fetchData().then((value) => {
+        setNote({
+          title: value.notes[0].title,
+          content: value.notes[0].content,
+        });
+      });
     }
-    fetchData().then((value) => {
-      setNote({ title: value.notes[0].title, content: value.notes[0].content });
-    });
   }, []);
 
   const NavHandler = () => {
-    NoteService.saveNote(params.id, {
-      title: note.title,
-      content: note.content,
-    });
+    if (params.id === "new") {
+      if (note.title || note.content)
+      NoteService.createNote({
+        title: note.title,
+        content: note.content,
+      });
+    } else {
+      NoteService.saveNote(params.id, {
+        title: note.title,
+        content: note.content,
+      });
+    }
+
     navigate("/notelist");
   };
 
   return (
     <div className="NotePage">
-      <InputTitle 
-        placeholder="Title" autoFocus 
+      <InputTitle
+        placeholder="Title"
+        autoFocus
         value={note.title}
-        onChange={e => setNote({...note, title: e.target.value})} 
+        onChange={(e) => setNote({ ...note, title: e.target.value })}
       />
 
-      <InputContent 
-        placeholder="Note" 
-        value={note.content} 
-        onChange={e => setNote({...note, content: e.target.value})}
+      <InputContent
+        placeholder="Note"
+        value={note.content}
+        onChange={(e) => setNote({ ...note, content: e.target.value })}
       />
 
       <MyButton onClick={NavHandler}>Back</MyButton>

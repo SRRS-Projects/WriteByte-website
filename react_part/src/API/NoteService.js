@@ -12,5 +12,10 @@ export default class NoteService {
     return response.data;
   }
 
+  static async createNote(data) {
+    const response = await axios.post(`http://127.0.0.1:8000/api/note/new`, data);
+    return response.data;
+  }
+
 }
 
