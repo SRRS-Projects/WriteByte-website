@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from asgiref.sync import sync_to_async
 from django.contrib import admin
 from django.urls import path, include
 from ninja import NinjaAPI, Schema
@@ -29,15 +30,15 @@ class NoteSchema(Schema):
 
 
 @api.post("/note/new")
-def createnote(request, data: NoteSchema):
+async def createnote(request, data: NoteSchema):
     note = Note(title=data.title, content=data.content, created_at=datetime.datetime.now())
-    note.save()
+    await note.asave()
     return {"create_success": "true"}
 
 
 @api.get("/note/{id}")
-def getnote(request, id: int):
-    data = Note.objects.filter(id=id) if id else Note.objects.filter()
+async def getnote(request, id: int):
+    data = await sync_to_async(Note.objects.filter)(id=id) if id else await sync_to_async(Note.objects.filter)()
     return {"notes": [
         {
             "id": note.id,
@@ -45,23 +46,23 @@ def getnote(request, id: int):
             "content": note.content,
             "created_at": note.created_at,
         }
-        for note in data]}
+        async for note in data]}
 
 
 @api.put("/note/{id}")
-def editnote(request, id: int, data: NoteSchema):
-    note = Note.objects.get(id=id)
+async def editnote(request, id: int, data: NoteSchema):
+    note = await Note.objects.aget(id=id)
     note.title = data.title
     note.content = data.content
     note.created_at = datetime.datetime.now()
-    note.save()
+    await note.asave()
     return {"edit_success": "true"}
 
 
 @api.delete("/note/{id}")
-def delnote(request, id: int):
-    note = Note.objects.get(id=id)
-    note.delete()
+async def delnote(request, id: int):
+    note = await Note.objects.aget(id=id)
+    await note.adelete()
     return {"delete_success": "true"}
 
 
@@ -70,3 +71,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
 ]
+
